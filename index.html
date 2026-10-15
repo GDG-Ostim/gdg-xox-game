@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+<title>GDG OSTİM Teknik — XOX</title>
+<meta name="description" content="GDG on Campus OSTİM Teknik Üniversitesi için XOX (Tic-Tac-Toe) oyunu" />
+<meta name="theme-color" content="#1a1a2e" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true">
+  <div class="blob blob-blue"></div>
+  <div class="blob blob-red"></div>
+  <div class="blob blob-yellow"></div>
+  <div class="blob blob-green"></div>
+</div>
+
+<div class="app" id="app">
+
+  <!-- HEADER / BRAND -->
+  <header class="brand-bar">
+    <div class="brand-logo">
+      <svg class="gdg-mark" viewBox="0 0 200 100" aria-hidden="true">
+        <g stroke-linecap="round" fill="none">
+          <path d="M70 20 L30 50" stroke="#EA4335" stroke-width="16"/>
+          <path d="M30 50 L70 80" stroke="#4285F4" stroke-width="16"/>
+          <path d="M130 20 L170 50" stroke="#34A853" stroke-width="16"/>
+          <path d="M170 50 L130 80" stroke="#FBBC05" stroke-width="16"/>
+        </g>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-title">GDG <strong>on Campus</strong></span>
+        <span class="brand-sub">OSTİM Teknik Üniversitesi</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SCREEN: HOME -->
+  <main id="screen-home" class="screen active">
+    <div class="mascot-wrap float">
+      <img src="assets/mascot.png" alt="GDG Maskot" class="mascot" />
+    </div>
+    <h1 class="title">XOX <span class="title-accent">Oyunu</span></h1>
+    <p class="subtitle">Bir arkadaşınla ya da yapay zekâya karşı oyna</p>
+
+    <div class="mode-grid">
+      <button class="mode-card" id="mode-2p" type="button">
+        <svg viewBox="0 0 24 24" class="mode-icon"><path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span class="mode-name">İki Kişilik</span>
+        <span class="mode-desc">Aynı ekrandan oynayın</span>
+      </button>
+      <button class="mode-card" id="mode-ai" type="button">
+        <svg viewBox="0 0 24 24" class="mode-icon"><path fill="currentColor" d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2zM7.5 12a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+        <span class="mode-name">Yapay Zekâya Karşı</span>
+        <span class="mode-desc">GDG botuna meydan oku</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- SCREEN: NAME ENTRY -->
+  <main id="screen-names" class="screen">
+    <button class="back-btn" id="back-from-names" type="button" aria-label="Geri">
+      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>
+    </button>
+    <div class="mascot-wrap small float">
+      <img src="assets/mascot.png" alt="GDG Maskot" class="mascot" />
+    </div>
+    <h2 class="title small-title">Oyunculara İsim Ver</h2>
+
+    <form id="names-form" class="form-card">
+      <div class="field" id="field-p1">
+        <label for="input-p1">1. Oyuncu (X)</label>
+        <input id="input-p1" maxlength="14" autocomplete="off" placeholder="İsim gir" />
+      </div>
+      <div class="field" id="field-p2">
+        <label for="input-p2">2. Oyuncu (O)</label>
+        <input id="input-p2" maxlength="14" autocomplete="off" placeholder="İsim gir" />
+      </div>
+      <button type="submit" class="btn-primary">Devam Et</button>
+    </form>
+  </main>
+
+  <!-- SCREEN: DICE ROLL -->
+  <main id="screen-dice" class="screen">
+    <h2 class="title small-title">Kim Başlayacak?</h2>
+    <p class="subtitle" id="dice-sub">Sırayla zar atın, en yüksek sayı başlar</p>
+
+    <div class="dice-arena">
+      <div class="dice-player">
+        <span class="dice-player-name" id="dice-name-1">—</span>
+        <div class="die" id="die-1">
+          <div class="die-face">
+            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+          </div>
+        </div>
+        <span class="dice-result" id="dice-result-1"></span>
+      </div>
+
+      <div class="dice-vs">VS</div>
+
+      <div class="dice-player">
+        <span class="dice-player-name" id="dice-name-2">—</span>
+        <div class="die" id="die-2">
+          <div class="die-face">
+            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+          </div>
+        </div>
+        <span class="dice-result" id="dice-result-2"></span>
+      </div>
+    </div>
+
+    <button class="btn-primary" id="btn-roll">Zar At</button>
+    <div class="dice-winner-banner" id="dice-winner-banner" hidden></div>
+    <button class="btn-primary btn-start-game" id="btn-start-game" hidden>Oyunu Başlat</button>
+  </main>
+
+  <!-- SCREEN: GAME -->
+  <main id="screen-game" class="screen">
+    <div class="game-top">
+      <div class="player-chip" id="chip-1">
+        <span class="chip-mark mark-x">
+          <svg viewBox="0 0 200 100" aria-hidden="true">
+            <g stroke-linecap="round" fill="none">
+              <path d="M70 20 L30 50" stroke="#EA4335" stroke-width="18"/>
+              <path d="M30 50 L70 80" stroke="#4285F4" stroke-width="18"/>
+              <path d="M130 20 L170 50" stroke="#34A853" stroke-width="18"/>
+              <path d="M170 50 L130 80" stroke="#FBBC05" stroke-width="18"/>
+            </g>
+          </svg>
+        </span>
+        <span class="chip-name" id="chip-name-1">Oyuncu 1</span>
+      </div>
+      <div class="status-pill" id="turn-status">Sıra belirleniyor…</div>
+      <div class="player-chip" id="chip-2">
+        <span class="chip-mark mark-o">O</span>
+        <span class="chip-name" id="chip-name-2">Oyuncu 2</span>
+      </div>
+    </div>
+
+    <div class="board-wrap">
+      <div class="mascot-side float" aria-hidden="true">
+        <img src="assets/mascot.png" alt="" class="mascot mascot-mini" />
+      </div>
+      <div class="board" id="board">
+        <!-- 9 cells injected by JS -->
+      </div>
+    </div>
+
+    <div class="game-actions">
+      <button class="btn-ghost" id="btn-restart">Yeniden Başlat</button>
+      <button class="btn-ghost" id="btn-home">Ana Menü</button>
+    </div>
+  </main>
+
+</div>
+
+<!-- WIN OVERLAY -->
+<div class="win-overlay" id="win-overlay" hidden>
+  <div class="confetti-field" id="confetti-field"></div>
+  <div class="win-card">
+    <img src="assets/mascot.png" alt="" class="win-mascot" />
+    <div class="win-label" id="win-label">Kazanan</div>
+    <div class="win-name" id="win-name">—</div>
+    <div class="win-actions">
+      <button class="btn-primary" id="btn-play-again">Tekrar Oyna</button>
+      <button class="btn-ghost" id="btn-win-home">Ana Menü</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
